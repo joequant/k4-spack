@@ -80,8 +80,11 @@ class Key4hepStack(BundlePackage):
     depends_on("pythia8@:8299", when="@0.1")
 
     # be explicit to avoid concretizer errors
-    depends_on('root cxxstd=17 +root7 +ssl')
+    # lcfiplus requires root variant +tmva, but spec asked for ~tmva
+    depends_on('root@6.22.0: cxxstd=17 +root7 +ssl +tmva +mlp')
     depends_on('boost +python')
+    # gaudi needs 3.7.99
+    depends_on('python@:3.7.99')
 
     conflicts("%gcc@8.3.1",
               msg="There are known issues with compilers from redhat's devtoolsets" \
