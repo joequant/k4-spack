@@ -1,15 +1,17 @@
 
 from spack import *
+from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version 
 
 class Fccsw(CMakePackage):
     """software framework of the FCC project"""
     homepage = "https://github.com/HEP-FCC/FCCSW/"
     url      = "https://github.com/HEP-FCC/FCCSW/archive/v0.5.tar.gz"
-    git      = "https://github.com/vvolkl/FCCSW.git"
+    git      = "https://github.com/HEP-FCC/FCCSW.git"
 
     maintainers = ['vvolkl']
 
     version('master', branch='master')
+    k4_add_latest_commit_as_version(git)
     version('0.13', sha256='4b76b28404f02dac09d9b02eb1db9926f5a53b21c6b91e95d3812267d575b116')
     version('0.12', sha256='a67151c12177882abd8afcf56bee47c2830c44cac749b23d08d005b45096b264')
     version('0.11', 'e3b5aa8f396cffae745305801eb8f7a38a8a7881')
@@ -53,7 +55,7 @@ class Fccsw(CMakePackage):
     depends_on('root')
 
 
-    depends_on("K4FWCore", when="@0.13:")
+    depends_on("k4fwcore", when="@0.13:")
     depends_on("edm4hep", when="@0.13:")
 
     depends_on("g4ensdfstate")
