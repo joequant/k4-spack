@@ -217,6 +217,7 @@ class Key4hepStack(BundlePackage):
     #######################################################
     depends_on("environment-modules", when="+bootstrap")
 
+
     ##################### conflicts #######################
     #######################################################
     conflicts("%gcc@8.3.1",
