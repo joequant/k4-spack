@@ -205,6 +205,12 @@ class Key4hepStack(BundlePackage):
     depends_on("dual-readout")
     k4_add_latest_commit_as_dependency("dual-readout", "hep-fcc/dual-readout", when="@master")
 
+    ############################## cepcsw #################
+    #######################################################
+    depends_on("cepcsw")
+    k4_add_latest_commit_as_dependency("cepcsw", "cepc/cepcsw", when="@master")
+
+
     ##################### developer tools #################
     #######################################################
     depends_on("cmake", when="+devtools")
@@ -212,6 +218,7 @@ class Key4hepStack(BundlePackage):
     depends_on("emacs+X toolkit=athena", when="+devtools")
     depends_on("ninja", when="+devtools")
     depends_on("py-ipython", when="+devtools")
+    depends_on("doxygen", when="+devtools")
 
     ##################### environment boostrap ############
     #######################################################

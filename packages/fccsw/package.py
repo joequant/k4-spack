@@ -3,7 +3,7 @@ from spack import *
 from spack.pkg.k4.Ilcsoftpackage import k4_add_latest_commit_as_version 
 
 class Fccsw(CMakePackage):
-    """software framework of the FCC project"""
+    """Software framework of the FCC project"""
     homepage = "https://github.com/HEP-FCC/FCCSW/"
     url      = "https://github.com/HEP-FCC/FCCSW/archive/v0.5.tar.gz"
     git      = "https://github.com/HEP-FCC/FCCSW.git"
@@ -12,6 +12,7 @@ class Fccsw(CMakePackage):
 
     version('master', branch='master')
     k4_add_latest_commit_as_version(git)
+    version('0.15', sha256='89d17e2a91459844a433516e351ecae7fe288563621e9c5cb4f7a801fd24fc2c')
     version('0.13', sha256='4b76b28404f02dac09d9b02eb1db9926f5a53b21c6b91e95d3812267d575b116')
     version('0.12', sha256='a67151c12177882abd8afcf56bee47c2830c44cac749b23d08d005b45096b264')
     version('0.11', 'e3b5aa8f396cffae745305801eb8f7a38a8a7881')
@@ -30,10 +31,13 @@ class Fccsw(CMakePackage):
             multi=False,
             description='Use the specified C++ standard when building.')
 
-    depends_on('acts@0.10.5 +identification +dd4hep +tgeo +digitization', when="@0.12:")
+    depends_on('acts', when='@0.15:')
+    depends_on('acts@0.10.5 +identification +dd4hep +tgeo +digitization', when="@0.12:0.14")
     depends_on('clhep')
     depends_on('dd4hep +geant4')
+    depends_on('delphes@3.4.3pre05:', when="@0.15:")
     depends_on('delphes')
+    depends_on('eigen')
     depends_on('fastjet')
 
     depends_on('fcc-edm@0.5.5', when="@:0.12")
@@ -80,5 +84,6 @@ class Fccsw(CMakePackage):
     def setup_run_environment(self, spack_env):
         spack_env.prepend_path('PYTHONPATH', self.prefix.python)
         spack_env.prepend_path("PATH", self.prefix.scripts)
-        spack_env.prepend_path("FCCSWBASEDIR", self.prefix)
-        spack_env.prepend_path("FCC_DETECTORS", self.prefix.share.FCCSW)
+        spack_env.set_path("FCCSWBASEDIR", self.prefix)
+        spack_env.set_path("FCC_DETECTORS", self.prefix.share.FCCSW)
+        spack_env.set_path("FCCSW", self.prefix.share.FCCSW)
