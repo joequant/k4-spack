@@ -225,4 +225,7 @@ class Key4hepStack(BundlePackage):
               "which are therefore not supported." \
               "See https://root-forum.cern.ch/t/devtoolset-gcc-toolset-compatibility/38286")
 
-    
+    #### concretizer
+    # edm4hep
+    depends_on('pythia8@:8299')
+    depends_on('root@6.22.0: cxxstd=17 +root7 +ssl +tmva +mlp')
