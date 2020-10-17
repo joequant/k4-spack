@@ -236,3 +236,5 @@ class Key4hepStack(BundlePackage):
     # edm4hep
     depends_on('pythia8@:8299')
     depends_on('root@6.22.0: cxxstd=17 +root7 +ssl +tmva +mlp')
+    #fccsw
+    depends_on('delphes@3.4.3pre05:')
